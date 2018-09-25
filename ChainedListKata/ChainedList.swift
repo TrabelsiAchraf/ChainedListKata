@@ -29,17 +29,16 @@ class ChainedList {
     }
     
     func size() -> Int {
-        var current = first
-        var count = 0
+        guard let current = first else { return 0 }
         
-        if current != nil {
-            count = 1
-            while let next = current!.next {
-                current = next
-                count += 1
-            }
+        var count = 1
+        var currentNode = current
+        
+        while currentNode.next != nil {
+            currentNode = currentNode.next!
+            count += 1
         }
-       
+        
         return count
     }
     
