@@ -91,4 +91,41 @@ class ChainedList {
     func removeAll() {
         first = nil
     }
+    
+    func nodeAt(index: Int) -> Node? {
+        if index >= 0 {
+            var current = first
+            var i = index
+            
+            while current != nil {
+                if i == 0 {
+                    return current
+                }
+                i -= 1
+                current = current!.next
+            }
+        }
+        return nil
+    }
+    
+    func insertAt(index: Int, value: Int) {
+        if index >= 0 && index <= size() {
+            var current = first
+            var previous = first
+            var i = index
+            
+            while current != nil {
+                if i == 0 {
+                    let newNode = Node(value: value)
+                    previous?.next = newNode
+                    newNode.next = current
+                    return
+                }
+        
+                i -= 1
+                previous = current
+                current = current!.next
+            }
+        }
+    }
 }
