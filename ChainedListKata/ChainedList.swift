@@ -33,7 +33,7 @@ class ChainedList {
     func size() -> Int {
         guard let current = first else { return 0 }
         
-        var count = 1
+        var count = 0
         var currentNode = current
         
         while currentNode.next != nil {
@@ -49,16 +49,21 @@ class ChainedList {
         print("Size => \(size())")
     }
     
+    /// Append new node the current chained list.
+    ///
+    /// - Parameter value: new value.
     func append(_ value: Int) {
-        var current = first
-        if current != nil  {
-            while let nextNode = current!.next {
-                current = nextNode
-            }
-            current!.next = Node(value: value)
-        } else {
+        if first == nil {
             first = Node(value: value)
         }
+        
+        var current = first
+        
+        while current!.next != nil {
+            current = current!.next
+        }
+        
+        current!.next = Node(value: value)
     }
     
     func remove(_ value: Int) {
