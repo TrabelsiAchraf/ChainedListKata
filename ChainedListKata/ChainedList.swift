@@ -11,23 +11,25 @@ import Foundation
 class ChainedList {
     var first: Node?
     
-    func show() {
-        var current = first
-        if current != nil {
-            print("                      ")
-            print("**********************")
-            print("**** Chained List ****")
-            print(current!.value)
-            while let next = current!.next {
-                current = next
-                print(next.value)
-            }
-            print("**********************")
-            print("**********************")
-            print("                      ")
+    /// Return the chained list nodes.
+    ///
+    /// - Returns: nodes.
+    func description() -> String {
+        guard let current = first else { return "This chained don't contains any node!" }
+        
+        var currentNode = current
+        var result = ""
+        while currentNode.next != nil {
+            currentNode = currentNode.next!
+            result += " -> \(currentNode.value)"
         }
+        
+        return result
     }
     
+    /// Get size of the chained list.
+    ///
+    /// - Returns: size.
     func size() -> Int {
         guard let current = first else { return 0 }
         
@@ -43,7 +45,7 @@ class ChainedList {
     }
     
     func details() {
-        show()
+        print(chainedList.description())
         print("Size => \(size())")
     }
     
