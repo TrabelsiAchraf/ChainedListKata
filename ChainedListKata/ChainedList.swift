@@ -66,38 +66,44 @@ class ChainedList {
         current!.next = Node(value: value)
     }
     
+    /// Remove node from the chained list.
+    ///
+    /// - Parameter value: value to remove.
     func remove(_ value: Int) {
-        var current = first
-        var previous = first
+        guard let current = first else { return }
         
-        if current != nil {
-            if current!.value == value {
-                if current!.next != nil {
-                    first = current!.next
-                } else {
-                    first = nil
-                }
+        var currentNode = current
+        var previousNode = current
+        
+        if currentNode.value == value {
+            first = nil
+            if currentNode.next != nil {
+                first = currentNode.next
             }
+        }
+        
+        while let nextNode = currentNode.next {
+            previousNode = currentNode
+            currentNode = nextNode
             
-            while let nextNode = current!.next {
-                previous = current
-                current = nextNode
-                
-                if current!.value == value {
-                    if current!.next != nil {
-                        previous!.next = current!.next
-                    } else {
-                        previous!.next = nil
-                    }
+            if currentNode.value == value {
+                previousNode.next = nil
+                if currentNode.next != nil {
+                    previousNode.next = currentNode.next
                 }
             }
         }
     }
     
+    /// Remove all nodes.
     func removeAll() {
         first = nil
     }
     
+    /// Get node at index.
+    ///
+    /// - Parameter index: index.
+    /// - Returns: node.
     func nodeAt(index: Int) -> Node? {
         if index >= 0 {
             var current = first
@@ -114,6 +120,11 @@ class ChainedList {
         return nil
     }
     
+    /// Insert node at index.
+    ///
+    /// - Parameters:
+    ///   - index: index.
+    ///   - value: value to add.
     func insertAt(index: Int, value: Int) {
         if index >= 0 && index <= size() {
             var current = first
@@ -127,11 +138,28 @@ class ChainedList {
                     newNode.next = current
                     return
                 }
-        
+                
                 i -= 1
                 previous = current
                 current = current!.next
             }
         }
+    }
+    
+    func reverse() -> Node? {
+        var nextNode = first?.next
+        var prevNode = first
+        var currentNode = first
+        
+        while nextNode != nil {
+            currentNode?.next = prevNode
+            prevNode = currentNode
+            currentNode = nextNode
+            nextNode =  currentNode?.next
+        }
+        
+        currentNode?.next = prevNode
+        
+        return currentNode
     }
 }

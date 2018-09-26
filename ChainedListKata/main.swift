@@ -19,6 +19,9 @@ chainedList.append(4)
 chainedList.append(5)
 chainedList.details()
 
+// Reverse chained list
+//let reversedChainedList = chainedList.reverse()
+
 // Get node at index 2, RQ : index start from 0
 print("Get node at index 2")
 if let node = chainedList.nodeAt(index: 2) {
@@ -32,7 +35,7 @@ chainedList.details()
 
 // Remove value 3
 print("Remove value 3")
-chainedList.remove(1)
+chainedList.remove(3)
 chainedList.details()
 
 // Remove value 4
